@@ -1,5 +1,5 @@
 # Integrador-I-Backend
-Backed proyecto integrador I 2019-02
+Backend proyecto integrador I 2019-02
 
 Proyecto de la materia Proyecto Integrador I 2019-2
 
