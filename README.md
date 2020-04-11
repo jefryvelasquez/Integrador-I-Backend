@@ -8,5 +8,7 @@ Modulo Gestión de Proyectos
 Integrantes:
 
 Astrid Carolina Diaz Gomez
+
 Jaider Fabian Molina Velez
+
 Jeferson Velásquez Ortiz
