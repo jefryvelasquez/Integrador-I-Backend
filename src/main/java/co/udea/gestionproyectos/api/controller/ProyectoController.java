@@ -48,5 +48,4 @@ public class ProyectoController {
         log.info("REST request buscar todos los proyectos");
         return ResponseEntity.ok(proyectoService.getProyectos());
     }
-
 }
