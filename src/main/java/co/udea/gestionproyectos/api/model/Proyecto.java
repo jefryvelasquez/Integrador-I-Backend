@@ -29,19 +29,40 @@ public class Proyecto {
     @Column(name = "asesor")
     private String asesor;
 
+
     @NotNull
-    @Column(name = "fechaCreacion")
+    @Column(name = "fecha_Creacion")
     private Date fecha_Creacion;
 
-    @Column(name = "fechaInicial")
+    @Column(name = "fecha_Inicial")
     private Date fecha_Inicial;
 
-    @Column(name = "fechaFinal")
+    @Column(name = "fecha_Final")
     private Date fecha_Final;
+
 
     @NotNull
     @Column(name = "objetivos")
     private String objetivos;
+
+    public Proyecto() {
+    }
+
+    public Proyecto(int id, String name, String responsable, String modalidad, String asesor, Date fecha_Creacion,
+                    Date fecha_Inicial, Date fecha_Final, String objetivos) {
+
+        this.name = name;
+        this.asesor = asesor;
+        this.responsable = responsable;
+        this.modalidad = modalidad;
+        this.objetivos = objetivos;
+        this.fecha_Creacion = fecha_Creacion;
+        this.fecha_Inicial = fecha_Inicial;
+        this.fecha_Final = fecha_Final;
+
+
+    }
+
 
     public Integer getId() {
         return id;
@@ -113,6 +134,21 @@ public class Proyecto {
 
     public void setObjetivos(String objetivos) {
         this.objetivos = objetivos;
+    }
+
+    @Override
+    public String toString() {
+        return "Proyecto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", responsable='" + responsable + '\'' +
+                ", modalidad='" + modalidad + '\'' +
+                ", asesor='" + asesor + '\'' +
+                ", fecha_Creacion=" + fecha_Creacion +
+                ", fecha_Inicial=" + fecha_Inicial +
+                ", fecha_Final=" + fecha_Final +
+                ", objetivos='" + objetivos + '\'' +
+                '}';
     }
 }
 
