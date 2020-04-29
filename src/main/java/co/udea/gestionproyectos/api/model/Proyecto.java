@@ -1,8 +1,8 @@
 package co.udea.gestionproyectos.api.model;
 
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
