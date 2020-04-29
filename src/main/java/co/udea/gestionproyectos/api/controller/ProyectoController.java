@@ -1,5 +1,6 @@
 package co.udea.gestionproyectos.api.controller;
 
+import co.udea.gestionproyectos.api.model.Objetivo;
 import co.udea.gestionproyectos.api.model.Proyecto;
 import co.udea.gestionproyectos.api.service.ProyectoService;
 import io.swagger.annotations.ApiOperation;
@@ -48,5 +49,21 @@ public class ProyectoController {
     public ResponseEntity<List<Proyecto>> getProyecetos() {
         log.info("REST request buscar todos los proyectos");
         return ResponseEntity.ok(proyectoService.getProyectos());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Proyecto> getObjetivo(@PathVariable Integer id) {
+        log.info("REST request buscar objetivo");
+        return ResponseEntity.ok(proyectoService.getProyecto(id));
+    }
+
+    @PutMapping()
+    public ResponseEntity<Proyecto> updateObjetivo(@RequestBody Proyecto proyecto) {
+        return ResponseEntity.ok(proyectoService.updateProyecto(proyecto));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProyecto(@PathVariable("id") Integer id) {//pathvarible me recibe las variables del browser
+        proyectoService.deleteProyecto(id);
     }
 }

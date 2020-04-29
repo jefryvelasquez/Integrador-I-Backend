@@ -34,7 +34,7 @@ public class ObjetivoController {
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
     public ResponseEntity<Objetivo> addObjetivo(@RequestBody Objetivo objetivo){
         log.info("REST request crear proyecto");
-        return ResponseEntity.ok(objetivoService.addObejtivo(objetivo));
+        return ResponseEntity.ok(objetivoService.addObjetivo(objetivo));
 
     }
 
@@ -61,7 +61,7 @@ public class ObjetivoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProyecto(@PathVariable("id") Integer id) {//pathvarible me recibe las variables del browser
+    public void deleteObjetivo(@PathVariable("id") Integer id) {//pathvarible me recibe las variables del browser
         objetivoService.deleteObjetivo(id);
     }
 }

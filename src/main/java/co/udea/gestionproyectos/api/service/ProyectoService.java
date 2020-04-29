@@ -2,6 +2,7 @@ package co.udea.gestionproyectos.api.service;
 
 import co.udea.gestionproyectos.api.exception.BusinessException;
 import co.udea.gestionproyectos.api.exception.DataDuplicatedException;
+import co.udea.gestionproyectos.api.model.Objetivo;
 import co.udea.gestionproyectos.api.model.Proyecto;
 import co.udea.gestionproyectos.api.repository.ProyectoRepository;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,26 @@ public class ProyectoService {
             throw new BusinessException(messages.get("exception.data_not_found.proyecto"));
         }
         return proyectoRepository.findAll();
+    }
+
+    public Proyecto getProyecto(Integer id){
+        if (proyectoRepository.findAll().size() == 0){
+            throw new BusinessException(messages.get("exception.data_not_found.proyecto"));
+        }else {
+            Optional<Proyecto> optionalProyecto = proyectoRepository.findById(id);
+            return optionalProyecto.get();
+        }
+    }
+
+    public Proyecto updateProyecto(Proyecto proyecto){
+        Optional<Proyecto> optionalProyecto = proyectoRepository.findByName(proyecto.getName());
+        if(!optionalProyecto.isPresent()){
+            throw new BusinessException(messages.get("El proyecto no existe"));
+        }//TODO:
+        return proyectoRepository.save(proyecto);
+    }
+
+    public void deleteProyecto(Integer id){
+        proyectoRepository.deleteById(id);
     }
 }

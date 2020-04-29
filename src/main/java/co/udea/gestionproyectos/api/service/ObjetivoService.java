@@ -21,7 +21,7 @@ public class ObjetivoService {
         this.messages = messages;
     }
 
-    public Objetivo addObejtivo(Objetivo objetivo){
+    public Objetivo addObjetivo(Objetivo objetivo){
         Optional<Objetivo> optionalObjetivo = objetivoRepository.findByEspecifico(objetivo.getEspecifico());
         if(optionalObjetivo.isPresent()){
             throw new DataDuplicatedException(messages.get("exception.data_duplicate_name.proyecto"));

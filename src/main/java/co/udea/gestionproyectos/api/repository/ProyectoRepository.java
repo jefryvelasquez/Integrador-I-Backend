@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ProyectoRepository extends JpaRepository<Proyecto, Integer> {
     Optional<Proyecto> findByName(String name);
+    Optional<Proyecto> findById(Integer id);
 }
