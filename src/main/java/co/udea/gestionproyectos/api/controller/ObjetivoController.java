@@ -1,6 +1,6 @@
 package co.udea.gestionproyectos.api.controller;
 
-import co.udea.gestionproyectos.api.model.Objetivo;
+import co.udea.gestionproyectos.api.model.ObjetivoEspecifico;
 import co.udea.gestionproyectos.api.service.ObjetivoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -32,7 +32,7 @@ public class ObjetivoController {
             @ApiResponse(code = 200, message = "El objetibo fue creado", response = Page.class),
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
-    public ResponseEntity<Objetivo> addObjetivo(@RequestBody Objetivo objetivo){
+    public ResponseEntity<ObjetivoEspecifico> addObjetivo(@RequestBody ObjetivoEspecifico objetivo){
         log.info("REST request crear proyecto");
         return ResponseEntity.ok(objetivoService.addObjetivo(objetivo));
 
@@ -44,20 +44,20 @@ public class ObjetivoController {
             @ApiResponse(code = 200, message = "Los objetivos fueron buscados", response = Page.class),
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
-    public ResponseEntity<List<Objetivo>> getObjetivos() {
+    public ResponseEntity<List<ObjetivoEspecifico>> getObjetivos() {
         log.info("REST request buscar todos los proyectos");
         return ResponseEntity.ok(objetivoService.getObjetivos());
     }
 
 
     @GetMapping("{id}")
-    public ResponseEntity<Objetivo> getObjetivo(@PathVariable Integer id) {
+    public ResponseEntity<ObjetivoEspecifico> getObjetivo(@PathVariable Integer id) {
         log.info("REST request buscar objetivo");
         return ResponseEntity.ok(objetivoService.getObjetivo(id));
     }
 
     @PutMapping("{update}")
-    public void updateObjetivo(@RequestBody Objetivo objetivo) {
+    public void updateObjetivo(@RequestBody ObjetivoEspecifico objetivo) {
         log.info("rest Request Actualizar Objetivos");
         objetivoService.updateObjetivo(objetivo);
     }
@@ -68,7 +68,7 @@ public class ObjetivoController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Objetivo>> getObjetivosProyecto(@RequestParam(value = "idproyecto") Integer idproyecto) {
+    public ResponseEntity<List<ObjetivoEspecifico>> getObjetivosProyecto(@RequestParam(value = "idproyecto") Integer idproyecto) {
         log.info("REST request buscar todos los objetivos por proyecto");
         return ResponseEntity.ok(objetivoService.getObjetivosProyecto(idproyecto));
     }

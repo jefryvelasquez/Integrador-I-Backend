@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "objetivos")
-public class Objetivo {
+public class ObjetivoEspecifico {
 
 
     @Id
@@ -20,18 +20,15 @@ public class Objetivo {
     private Proyecto idProyecto;
 
     @NotNull
-    @Column(name = "especifico")
-    private String especifico;
+    @Column(name = "name")
+    private String name;
 
-    @NotNull
-    @Column(name = "general")
-    private String general;
 
     @NotNull
     @Column(name = "porcentaje")
     private float porcenteje;
 
-    public Objetivo() {
+    public ObjetivoEspecifico() {
     }
 
     public Integer getId() {
@@ -42,20 +39,12 @@ public class Objetivo {
         this.id = id;
     }
 
-    public String getEspecifico() {
-        return especifico;
+    public String getName() {
+        return name;
     }
 
-    public void setEspecifico(String especifico) {
-        this.especifico = especifico;
-    }
-
-    public String getGeneral() {
-        return general;
-    }
-
-    public void setGeneral(String general) {
-        this.general = general;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Proyecto getIdProyecto() {

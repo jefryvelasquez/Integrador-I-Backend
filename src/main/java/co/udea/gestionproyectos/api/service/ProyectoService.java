@@ -2,7 +2,6 @@ package co.udea.gestionproyectos.api.service;
 
 import co.udea.gestionproyectos.api.exception.BusinessException;
 import co.udea.gestionproyectos.api.exception.DataDuplicatedException;
-import co.udea.gestionproyectos.api.model.Objetivo;
 import co.udea.gestionproyectos.api.model.Proyecto;
 import co.udea.gestionproyectos.api.repository.ProyectoRepository;
 import org.springframework.stereotype.Service;

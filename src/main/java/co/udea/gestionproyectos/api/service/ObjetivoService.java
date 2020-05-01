@@ -2,9 +2,8 @@ package co.udea.gestionproyectos.api.service;
 
 import co.udea.gestionproyectos.api.exception.BusinessException;
 import co.udea.gestionproyectos.api.exception.DataDuplicatedException;
-import co.udea.gestionproyectos.api.model.Objetivo;
+import co.udea.gestionproyectos.api.model.ObjetivoEspecifico;
 import co.udea.gestionproyectos.api.repository.ObjetivoRepository;
-import co.udea.gestionproyectos.api.repository.ProyectoRepository;
 import co.udea.gestionproyectos.api.util.Messages;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +21,8 @@ public class ObjetivoService {
         this.messages = messages;
     }
 
-    public Objetivo addObjetivo(Objetivo objetivo){
-        Optional<Objetivo> optionalObjetivo = objetivoRepository.findByEspecifico(objetivo.getEspecifico());
+    public ObjetivoEspecifico addObjetivo(ObjetivoEspecifico objetivo){
+        Optional<ObjetivoEspecifico> optionalObjetivo = objetivoRepository.findByName(objetivo.getName());
         if(optionalObjetivo.isPresent()){
             throw new DataDuplicatedException(messages.get("exception.data_duplicate_name.objetivo"));
         }
@@ -31,7 +30,7 @@ public class ObjetivoService {
         return objetivoRepository.save(objetivo);
     }
 
-    public List<Objetivo> getObjetivos(){
+    public List<ObjetivoEspecifico> getObjetivos(){
 
         if (objetivoRepository.findAll().size() == 0){
             throw new BusinessException(messages.get("exception.data_not_found.objetivo"));
@@ -39,22 +38,21 @@ public class ObjetivoService {
         return objetivoRepository.findAll();
     }
 
-    public Objetivo getObjetivo(Integer id){
+    public ObjetivoEspecifico getObjetivo(Integer id){
         if (objetivoRepository.findAll().size() == 0){
             throw new BusinessException(messages.get("exception.data_not_found.objetivo"));
         }else {
-            Optional<Objetivo> optionalObjetivo = objetivoRepository.findById(id);
+            Optional<ObjetivoEspecifico> optionalObjetivo = objetivoRepository.findById(id);
             return optionalObjetivo.get();
         }
     }
 
-    public void updateObjetivo(Objetivo objetivo){
-        Optional<Objetivo> optionalObjetivo = objetivoRepository.findById(objetivo.getId());
+    public void updateObjetivo(ObjetivoEspecifico objetivo){
+        Optional<ObjetivoEspecifico> optionalObjetivo = objetivoRepository.findById(objetivo.getId());
         if(!optionalObjetivo.isPresent()){
             throw new BusinessException(messages.get("El objetivo no existe"));
         }//TODO:
-        optionalObjetivo.get().setEspecifico(objetivo.getEspecifico());
-        optionalObjetivo.get().setGeneral(objetivo.getGeneral());
+        optionalObjetivo.get().setName(objetivo.getName());
         addObjetivo(optionalObjetivo.get());
     }
 
@@ -62,7 +60,7 @@ public class ObjetivoService {
         objetivoRepository.deleteById(id);
     }
 
-    public List<Objetivo> getObjetivosProyecto(Integer idProyecto){
+    public List<ObjetivoEspecifico> getObjetivosProyecto(Integer idProyecto){
         if (objetivoRepository.findByIdProyecto_id(idProyecto).size()==0){
             throw new BusinessException(messages.get("exception.data_not_found.objetivo"));
         }
