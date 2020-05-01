@@ -1,6 +1,7 @@
 package co.udea.gestionproyectos.api.repository;
 
 import co.udea.gestionproyectos.api.model.Objetivo;
+import co.udea.gestionproyectos.api.model.Proyecto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,7 @@ public interface ObjetivoRepository extends JpaRepository<Objetivo, Integer> {
 
     Optional<Objetivo> findByEspecifico(String especifico);
     Optional<Objetivo> findById(Integer id);
-    List<Objetivo> findByIdProyecto(Integer idProyecto);
+    List<Objetivo> findByIdProyecto_id(Integer idProyecto);
 
 }
 

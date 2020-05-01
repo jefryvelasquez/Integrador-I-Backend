@@ -4,6 +4,7 @@ import co.udea.gestionproyectos.api.exception.BusinessException;
 import co.udea.gestionproyectos.api.exception.DataDuplicatedException;
 import co.udea.gestionproyectos.api.model.Objetivo;
 import co.udea.gestionproyectos.api.repository.ObjetivoRepository;
+import co.udea.gestionproyectos.api.repository.ProyectoRepository;
 import co.udea.gestionproyectos.api.util.Messages;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,6 @@ import java.util.Optional;
 @Service
 public class ObjetivoService {
 
-    private Objetivo objetivo;
     private Messages messages;
     private ObjetivoRepository objetivoRepository;
 
@@ -63,11 +63,11 @@ public class ObjetivoService {
     }
 
     public List<Objetivo> getObjetivosProyecto(Integer idProyecto){
-
-        if (objetivoRepository.findByIdProyecto(idProyecto).size()==0){
+        if (objetivoRepository.findByIdProyecto_id(idProyecto).size()==0){
             throw new BusinessException(messages.get("exception.data_not_found.objetivo"));
         }
-        return objetivoRepository.findByIdProyecto(idProyecto);
+        //preguntar por findByIdProyecto
+        return objetivoRepository.findByIdProyecto_id(idProyecto);
     }
 }
 

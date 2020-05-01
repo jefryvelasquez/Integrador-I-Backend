@@ -49,6 +49,7 @@ public class ObjetivoController {
         return ResponseEntity.ok(objetivoService.getObjetivos());
     }
 
+
     @GetMapping("{id}")
     public ResponseEntity<Objetivo> getObjetivo(@PathVariable Integer id) {
         log.info("REST request buscar objetivo");
@@ -66,8 +67,8 @@ public class ObjetivoController {
         objetivoService.deleteObjetivo(id);
     }
 
-    @GetMapping("/{idproyecto}")
-    public ResponseEntity<List<Objetivo>> getObjetivosProyecto(@PathVariable Integer idproyecto) {
+    @GetMapping("/")
+    public ResponseEntity<List<Objetivo>> getObjetivosProyecto(@RequestParam(value = "idproyecto") Integer idproyecto) {
         log.info("REST request buscar todos los objetivos por proyecto");
         return ResponseEntity.ok(objetivoService.getObjetivosProyecto(idproyecto));
     }
