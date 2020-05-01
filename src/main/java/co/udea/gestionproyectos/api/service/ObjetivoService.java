@@ -22,12 +22,17 @@ public class ObjetivoService {
     }
 
     public ObjetivoEspecifico addObjetivo(ObjetivoEspecifico objetivo){
+        boolean confirmar = confirmarPorcentaje(objetivo);
+        if(confirmar){
         Optional<ObjetivoEspecifico> optionalObjetivo = objetivoRepository.findByName(objetivo.getName());
         if(optionalObjetivo.isPresent()){
             throw new DataDuplicatedException(messages.get("exception.data_duplicate_name.objetivo"));
         }
-
         return objetivoRepository.save(objetivo);
+        }
+        else{
+            throw new BusinessException(messages.get("exception.data_duplicate_name.objetivoPorcentaje"));
+        }
     }
 
     public List<ObjetivoEspecifico> getObjetivos(){
@@ -66,6 +71,21 @@ public class ObjetivoService {
         }
         //preguntar por findByIdProyecto
         return objetivoRepository.findByIdProyecto_id(idProyecto);
+    }
+
+    public boolean confirmarPorcentaje(ObjetivoEspecifico objetivoEspecifico){
+        float cont=0;
+        List<ObjetivoEspecifico> aux = objetivoRepository.findByIdProyecto_id(objetivoEspecifico.getIdProyecto().getId());
+        for(int i=0;i<objetivoRepository.findByIdProyecto_id(objetivoEspecifico.getIdProyecto().getId()).size();i++){
+                cont += aux.get(i).getPorcenteje();
+        }
+        cont += objetivoEspecifico.getPorcenteje();
+        if(cont<=100){
+           return true;
+        }else{
+            return false;
+        }
+
     }
 }
 

@@ -1,5 +1,6 @@
 package co.udea.gestionproyectos.api.controller;
 
+import co.udea.gestionproyectos.api.exception.BusinessException;
 import co.udea.gestionproyectos.api.model.ObjetivoEspecifico;
 import co.udea.gestionproyectos.api.service.ObjetivoService;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +36,6 @@ public class ObjetivoController {
     public ResponseEntity<ObjetivoEspecifico> addObjetivo(@RequestBody ObjetivoEspecifico objetivo){
         log.info("REST request crear proyecto");
         return ResponseEntity.ok(objetivoService.addObjetivo(objetivo));
-
     }
 
     @GetMapping()
