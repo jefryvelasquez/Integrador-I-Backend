@@ -55,9 +55,10 @@ public class ObjetivoController {
         return ResponseEntity.ok(objetivoService.getObjetivo(id));
     }
 
-    @PutMapping()
-    public ResponseEntity<Objetivo> updateObjetivo(@RequestBody Objetivo objetivo) {
-        return ResponseEntity.ok(objetivoService.updateObjetivo(objetivo));
+    @PutMapping("{update}")
+    public void updateObjetivo(@RequestBody Objetivo objetivo) {
+        log.info("rest Request Actualizar Objetivos");
+        objetivoService.updateObjetivo(objetivo);
     }
 
     @DeleteMapping("/{id}")

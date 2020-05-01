@@ -1,6 +1,5 @@
 package co.udea.gestionproyectos.api.controller;
 
-import co.udea.gestionproyectos.api.model.Objetivo;
 import co.udea.gestionproyectos.api.model.Proyecto;
 import co.udea.gestionproyectos.api.service.ProyectoService;
 import io.swagger.annotations.ApiOperation;
@@ -58,8 +57,9 @@ public class ProyectoController {
     }
 
     @PutMapping()
-    public ResponseEntity<Proyecto> updateObjetivo(@RequestBody Proyecto proyecto) {
-        return ResponseEntity.ok(proyectoService.updateProyecto(proyecto));
+    public void updateObjetivo(@RequestBody Proyecto proyecto) {
+        log.info("rest Request Actualizar Objetivos");
+        proyectoService.updateProyecto(proyecto);
     }
 
     @DeleteMapping("/{id}")

@@ -24,7 +24,7 @@ public class ObjetivoService {
     public Objetivo addObjetivo(Objetivo objetivo){
         Optional<Objetivo> optionalObjetivo = objetivoRepository.findByEspecifico(objetivo.getEspecifico());
         if(optionalObjetivo.isPresent()){
-            throw new DataDuplicatedException(messages.get("exception.data_duplicate_name.proyecto"));
+            throw new DataDuplicatedException(messages.get("exception.data_duplicate_name.objetivo"));
         }
 
         return objetivoRepository.save(objetivo);
@@ -33,7 +33,7 @@ public class ObjetivoService {
     public List<Objetivo> getObjetivos(){
 
         if (objetivoRepository.findAll().size() == 0){
-            throw new BusinessException(messages.get("exception.data_not_found.proyecto"));
+            throw new BusinessException(messages.get("exception.data_not_found.objetivo"));
         }
         return objetivoRepository.findAll();
     }
@@ -47,12 +47,14 @@ public class ObjetivoService {
         }
     }
 
-    public Objetivo updateObjetivo(Objetivo objetivo){
-        Optional<Objetivo> optionalObjetivo = objetivoRepository.findByEspecifico(objetivo.getEspecifico());
+    public void updateObjetivo(Objetivo objetivo){
+        Optional<Objetivo> optionalObjetivo = objetivoRepository.findById(objetivo.getId());
         if(!optionalObjetivo.isPresent()){
             throw new BusinessException(messages.get("El objetivo no existe"));
         }//TODO:
-        return objetivoRepository.save(objetivo);
+        optionalObjetivo.get().setEspecifico(objetivo.getEspecifico());
+        optionalObjetivo.get().setGeneral(objetivo.getGeneral());
+        addObjetivo(optionalObjetivo.get());
     }
 
     public void deleteObjetivo(Integer id){

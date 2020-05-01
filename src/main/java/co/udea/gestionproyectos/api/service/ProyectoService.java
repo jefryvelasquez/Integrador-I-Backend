@@ -48,12 +48,14 @@ public class ProyectoService {
         }
     }
 
-    public Proyecto updateProyecto(Proyecto proyecto){
-        Optional<Proyecto> optionalProyecto = proyectoRepository.findByName(proyecto.getName());
+    public void updateProyecto(Proyecto proyecto){
+        Optional<Proyecto> optionalProyecto = proyectoRepository.findById(proyecto.getId());
         if(!optionalProyecto.isPresent()){
             throw new BusinessException(messages.get("El proyecto no existe"));
         }//TODO:
-        return proyectoRepository.save(proyecto);
+        optionalProyecto.get().setName(proyecto.getName());
+        optionalProyecto.get().setAsesor(proyecto.getAsesor());
+        addProyecto(optionalProyecto.get());
     }
 
     public void deleteProyecto(Integer id){
