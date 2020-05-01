@@ -2,7 +2,7 @@ package co.udea.gestionproyectos.api.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "objetivos")
@@ -10,9 +10,14 @@ public class Objetivo {
 
 
     @Id
-    @Column(name = "idProyecto")
+    @Column(name = "id")
     @GeneratedValue
     private Integer id;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "idProyecto")
+    private Proyecto idProyecto;
 
     @NotNull
     @Column(name = "especifico")
@@ -21,6 +26,10 @@ public class Objetivo {
     @NotNull
     @Column(name = "general")
     private String general;
+
+    @NotNull
+    @Column(name = "porcentaje")
+    private float porcenteje;
 
     public Objetivo() {
     }
@@ -48,5 +57,22 @@ public class Objetivo {
     public void setGeneral(String general) {
         this.general = general;
     }
+
+    public Proyecto getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(Proyecto idProyecto) {
+        this.idProyecto = idProyecto;
+    }
+
+    public float getPorcenteje() {
+        return porcenteje;
+    }
+
+    public void setPorcenteje(float porcenteje) {
+        this.porcenteje = porcenteje;
+    }
 }
+
 

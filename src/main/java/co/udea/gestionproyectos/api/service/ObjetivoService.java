@@ -13,6 +13,7 @@ import java.util.Optional;
 @Service
 public class ObjetivoService {
 
+    private Objetivo objetivo;
     private Messages messages;
     private ObjetivoRepository objetivoRepository;
 
@@ -59,6 +60,14 @@ public class ObjetivoService {
 
     public void deleteObjetivo(Integer id){
         objetivoRepository.deleteById(id);
+    }
+
+    public List<Objetivo> getObjetivosProyecto(Integer idProyecto){
+
+        if (objetivoRepository.findByIdProyecto(idProyecto).size()==0){
+            throw new BusinessException(messages.get("exception.data_not_found.objetivo"));
+        }
+        return objetivoRepository.findByIdProyecto(idProyecto);
     }
 }
 

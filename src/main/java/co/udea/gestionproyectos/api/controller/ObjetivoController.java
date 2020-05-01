@@ -65,4 +65,10 @@ public class ObjetivoController {
     public void deleteObjetivo(@PathVariable("id") Integer id) {//pathvarible me recibe las variables del browser
         objetivoService.deleteObjetivo(id);
     }
+
+    @GetMapping("/{idproyecto}")
+    public ResponseEntity<List<Objetivo>> getObjetivosProyecto(@PathVariable Integer idproyecto) {
+        log.info("REST request buscar todos los objetivos por proyecto");
+        return ResponseEntity.ok(objetivoService.getObjetivosProyecto(idproyecto));
+    }
 }
