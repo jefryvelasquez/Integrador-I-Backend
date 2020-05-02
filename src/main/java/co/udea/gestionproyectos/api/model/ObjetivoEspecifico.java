@@ -26,7 +26,7 @@ public class ObjetivoEspecifico {
 
     @NotNull
     @Column(name = "porcentaje")
-    private float porcenteje;
+    private float porcentaje;
 
     public ObjetivoEspecifico() {
     }
@@ -55,12 +55,12 @@ public class ObjetivoEspecifico {
         this.idProyecto = idProyecto;
     }
 
-    public float getPorcenteje() {
-        return porcenteje;
+    public float getPorcentaje() {
+        return porcentaje;
     }
 
-    public void setPorcenteje(float porcenteje) {
-        this.porcenteje = porcenteje;
+    public void setPorcentaje(float porcenteje) {
+        this.porcentaje = porcenteje;
     }
 }
 

@@ -2,6 +2,7 @@ package co.udea.gestionproyectos.api.controller;
 
 import co.udea.gestionproyectos.api.exception.BusinessException;
 import co.udea.gestionproyectos.api.model.ObjetivoEspecifico;
+import co.udea.gestionproyectos.api.model.Proyecto;
 import co.udea.gestionproyectos.api.service.ObjetivoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -35,6 +36,9 @@ public class ObjetivoController {
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
     public ResponseEntity<ObjetivoEspecifico> addObjetivo(@RequestBody ObjetivoEspecifico objetivo){
         log.info("REST request crear proyecto");
+        Proyecto pro = new Proyecto();
+        pro.setId(objetivo.getId());
+        objetivo.setIdProyecto(pro);
         return ResponseEntity.ok(objetivoService.addObjetivo(objetivo));
     }
 

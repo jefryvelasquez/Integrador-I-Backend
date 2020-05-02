@@ -77,9 +77,9 @@ public class ObjetivoService {
         float cont=0;
         List<ObjetivoEspecifico> aux = objetivoRepository.findByIdProyecto_id(objetivoEspecifico.getIdProyecto().getId());
         for(int i=0;i<objetivoRepository.findByIdProyecto_id(objetivoEspecifico.getIdProyecto().getId()).size();i++){
-                cont += aux.get(i).getPorcenteje();
+                cont += aux.get(i).getPorcentaje();
         }
-        cont += objetivoEspecifico.getPorcenteje();
+        cont += objetivoEspecifico.getPorcentaje();
         if(cont<=100){
            return true;
         }else{
