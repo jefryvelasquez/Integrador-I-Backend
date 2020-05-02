@@ -22,6 +22,9 @@ public class ObjetivoService {
     }
 
     public ObjetivoEspecifico addObjetivo(ObjetivoEspecifico objetivo){
+        if (objetivoRepository.findByIdProyecto_id(objetivo.getIdProyecto().getId()).size() == 0){
+            throw new DataDuplicatedException(messages.get("exception.data_id_not_exist.proyecto"));
+        }
         boolean confirmar = confirmarPorcentaje(objetivo);
         if(confirmar){
         Optional<ObjetivoEspecifico> optionalObjetivo = objetivoRepository.findByName(objetivo.getName());
