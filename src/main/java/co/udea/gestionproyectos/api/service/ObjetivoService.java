@@ -3,7 +3,9 @@ package co.udea.gestionproyectos.api.service;
 import co.udea.gestionproyectos.api.exception.BusinessException;
 import co.udea.gestionproyectos.api.exception.DataDuplicatedException;
 import co.udea.gestionproyectos.api.model.ObjetivoEspecifico;
+import co.udea.gestionproyectos.api.model.Proyecto;
 import co.udea.gestionproyectos.api.repository.ObjetivoRepository;
+import co.udea.gestionproyectos.api.repository.ProyectoRepository;
 import co.udea.gestionproyectos.api.util.Messages;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +17,22 @@ public class ObjetivoService {
 
     private Messages messages;
     private ObjetivoRepository objetivoRepository;
+    private ProyectoRepository proyectoRepository;
 
-    public ObjetivoService(ObjetivoRepository objetivoRepository, Messages messages){
+    public ObjetivoService(ObjetivoRepository objetivoRepository, ProyectoRepository proyectoRepository, Messages messages){
         this.objetivoRepository = objetivoRepository;
+        this.proyectoRepository = proyectoRepository;
         this.messages = messages;
     }
 
     public ObjetivoEspecifico addObjetivo(ObjetivoEspecifico objetivo){
+        Optional<Proyecto> optionalProyecto = proyectoRepository.findById(objetivo.getIdProyecto().getId());
+        if (!optionalProyecto.isPresent()){
+            throw new DataDuplicatedException(messages.get("exception.data_id_not_exist.proyecto"));
+        }
+        if(objetivo.getPorcentaje() <= 0 ){
+            throw new DataDuplicatedException(messages.get("exception.data_duplicate_name.objetivoPorcentajeMenor"));
+        }
         boolean confirmar = confirmarPorcentaje(objetivo);
         if(confirmar){
         Optional<ObjetivoEspecifico> optionalObjetivo = objetivoRepository.findByName(objetivo.getName());
