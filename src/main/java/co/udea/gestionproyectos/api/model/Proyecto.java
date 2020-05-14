@@ -11,7 +11,7 @@ public class Proyecto {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
@@ -47,7 +47,7 @@ public class Proyecto {
     public Proyecto() {
     }
 
-    public Proyecto(int id, String name, String responsable, String modalidad, String asesor, Date fecha_Creacion,
+    public Proyecto(String name, String responsable, String modalidad, String asesor, Date fecha_Creacion,
                     Date fecha_Inicial, Date fecha_Final, String objetivos) {
 
         this.name = name;

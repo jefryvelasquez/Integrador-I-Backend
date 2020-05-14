@@ -28,7 +28,7 @@ public class ObjetivoController {
     }
 
 
-    @PostMapping
+    @PostMapping("crear")
     @ApiOperation(value = "Crear un nuevo objetivo", response = Page.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "El objetivo fue creado", response = Page.class),

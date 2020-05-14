@@ -10,7 +10,7 @@ public class EntregablesObjetivo {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
