@@ -28,8 +28,17 @@ public class ObjetivoEspecifico {
     @Column(name = "porcentaje")
     private float porcentaje;
 
+    @NotNull
+    @Column(name = "entregable")
+    private String entregable;
+
+    @NotNull
+    @Column(name = "estadoObjetivo")
+    private float estadoObjetivo;
+
     public ObjetivoEspecifico() {
     }
+
 
     public Integer getId() {
         return id;
@@ -61,6 +70,22 @@ public class ObjetivoEspecifico {
 
     public void setPorcentaje(float porcenteje) {
         this.porcentaje = porcenteje;
+    }
+
+    public String getEntregable() {
+        return entregable;
+    }
+
+    public void setEntregable(String entregable) {
+        this.entregable = entregable;
+    }
+
+    public float getEstadoObjetivo() {
+        return estadoObjetivo;
+    }
+
+    public void setEstadoObjetivo(float estadoObjetivo) {
+        this.estadoObjetivo = estadoObjetivo;
     }
 }
 

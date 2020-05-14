@@ -28,14 +28,14 @@ public class ObjetivoController {
     }
 
 
-    @PostMapping("crear")
-    @ApiOperation(value = "Crear un nuevo proyecto", response = Page.class)
+    @PostMapping
+    @ApiOperation(value = "Crear un nuevo objetivo", response = Page.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "El objetibo fue creado", response = Page.class),
+            @ApiResponse(code = 200, message = "El objetivo fue creado", response = Page.class),
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
     public ResponseEntity<ObjetivoEspecifico> addObjetivo(@RequestBody ObjetivoEspecifico objetivo){
-        log.info("REST request crear proyecto");
+        log.info("REST request crear objetivo");
         Proyecto pro = new Proyecto();
         pro.setId(objetivo.getId());
         objetivo.setIdProyecto(pro);
@@ -49,7 +49,7 @@ public class ObjetivoController {
             @ApiResponse(code = 400, message = "La petición es invalida"),
             @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
     public ResponseEntity<List<ObjetivoEspecifico>> getObjetivos() {
-        log.info("REST request buscar todos los proyectos");
+        log.info("REST request buscar todos los objetivos");
         return ResponseEntity.ok(objetivoService.getObjetivos());
     }
 

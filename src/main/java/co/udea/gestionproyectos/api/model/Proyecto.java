@@ -40,7 +40,6 @@ public class Proyecto {
     @Column(name = "fecha_Final")
     private Date fecha_Final;
 
-
     @NotNull
     @Column(name = "objetivos")
     private String objetivos;
