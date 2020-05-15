@@ -19,6 +19,7 @@ public class EntregableService {
     private EntregableRepository entregableRepository;
     private ObjetivoRepository objetivoRepository;
 
+
     public EntregableService(Messages messages, EntregableRepository entregableRepository, ObjetivoRepository objetivoRepository) {
         this.messages = messages;
         this.entregableRepository = entregableRepository;
@@ -37,11 +38,13 @@ public class EntregableService {
         if(confirmar){
             Optional<EntregablesObjetivo> optionalEntregable = entregableRepository.findByName(entregable.getName());
             if(optionalEntregable.isPresent()){
+                //System.out.println("estoy entrando al else");
                 throw new DataDuplicatedException(messages.get("exception.data_duplicate_name.entregable"));
             }
             return entregableRepository.save(entregable);
         }
         else{
+
             throw new BusinessException(messages.get("exception.data_duplicate_name.entregablePorcentaje"));
         }
     }
@@ -69,6 +72,7 @@ public class EntregableService {
             throw new BusinessException(messages.get("El entregable no existe"));
         }//TODO:
         optionalEntregable.get().setName(entregable.getName());
+        optionalEntregable.get().setPorcentaje(entregable.getPorcentaje());
         addEntregable(optionalEntregable.get());
     }
 
@@ -77,25 +81,36 @@ public class EntregableService {
     }
 
     public List<EntregablesObjetivo> getEntregableObjetivo(Integer idObjetivo){
-        if (entregableRepository.findByIdObjetivoEspecifico_Id(idObjetivo).size()==0){
+        if (entregableRepository.findByIdObjetivoEspecifico_id(idObjetivo).size()==0){
             throw new BusinessException(messages.get("exception.data_not_found.objetivo"));
         }
 
-        return entregableRepository.findByIdObjetivoEspecifico_Id(idObjetivo);
+        return entregableRepository.findByIdObjetivoEspecifico_id(idObjetivo);
     }
 
     public boolean porcentajeEntregable(EntregablesObjetivo entregablesObjetivo){
         float cont=0;
-        List<EntregablesObjetivo> aux = entregableRepository.findByIdObjetivoEspecifico_Id(entregablesObjetivo.getIdObjetivoEspecifico().getId());
-        for(int i=0;i<objetivoRepository.findByIdProyecto_id(entregablesObjetivo.getIdObjetivoEspecifico().getId()).size();i++){
+        Optional<ObjetivoEspecifico> estado;
+        List<EntregablesObjetivo> aux = entregableRepository.findByIdObjetivoEspecifico_id(entregablesObjetivo.getIdObjetivoEspecifico().getId());
+        for(int i=0;i<entregableRepository.findByIdObjetivoEspecifico_id(entregablesObjetivo.getIdObjetivoEspecifico().getId()).size();i++){
             cont += aux.get(i).getPorcentaje();
         }
-        cont += entregablesObjetivo.getPorcentaje();
+        //cont += entregablesObjetivo.getPorcentaje();
         if(cont<=100){
+            /*System.out.println("tamaño: ->   " + aux.size());
+            System.out.println("lo que me trae: ->   " + aux.get(0).getPorcentaje());
+            System.out.println("lo que me trae: ->   " + aux.get(1).getPorcentaje());
+            //System.out.println("lo que me trae: ->   " + aux.get(2).getPorcentaje());
+            System.out.println("lo que me trae: ->   " + cont);*/
+            estado = objetivoRepository.findById(entregablesObjetivo.getIdObjetivoEspecifico().getId());
+            estado.get().setEstadoObjetivo(cont);
+            //funcionaba solo con darle set no habia necesidad de guardarlo
+            //System.out.println("lo que trae: -> " + estado.get().getEstadoObjetivo());
             return true;
         }else{
             return false;
         }
 
     }
+
 }

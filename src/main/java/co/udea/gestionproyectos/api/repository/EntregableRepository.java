@@ -12,5 +12,5 @@ public interface EntregableRepository extends JpaRepository<EntregablesObjetivo,
 
     Optional<EntregablesObjetivo> findByName(String name);
     Optional<EntregablesObjetivo> findById(Integer id);
-    List<EntregablesObjetivo> findByIdObjetivoEspecifico_Id(Integer idObjetivoEspecifico);
+    List<EntregablesObjetivo> findByIdObjetivoEspecifico_id(Integer idObjetivoEspecifico);
 }
