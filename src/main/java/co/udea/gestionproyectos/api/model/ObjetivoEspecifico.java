@@ -11,7 +11,7 @@ public class ObjetivoEspecifico {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue (strategy=GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
 
     @NotNull

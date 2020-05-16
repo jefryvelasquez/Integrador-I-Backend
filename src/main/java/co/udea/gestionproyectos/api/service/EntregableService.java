@@ -95,7 +95,7 @@ public class EntregableService {
         for(int i=0;i<entregableRepository.findByIdObjetivoEspecifico_id(entregablesObjetivo.getIdObjetivoEspecifico().getId()).size();i++){
             cont += aux.get(i).getPorcentaje();
         }
-        //cont += entregablesObjetivo.getPorcentaje();
+        cont += entregablesObjetivo.getPorcentaje();
         if(cont<=100){
             /*System.out.println("tamaño: ->   " + aux.size());
             System.out.println("lo que me trae: ->   " + aux.get(0).getPorcentaje());
