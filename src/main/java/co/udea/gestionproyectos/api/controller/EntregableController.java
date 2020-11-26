@@ -56,12 +56,14 @@ public class EntregableController {
     public ResponseEntity<EntregablesObjetivo> getEntregable(@PathVariable Integer id) {
         log.info("REST request buscar entregable");
         return ResponseEntity.ok(entregableService.getEntregable(id));
+		
     }
 
     @PutMapping("{update}")
     public void updateEntregable(@RequestBody EntregablesObjetivo entregable) {
         log.info("rest Request Actualizar Entregables");
         entregableService.updateEntregable(entregable);
+		
     }
 
     @DeleteMapping("/{id}")
@@ -73,5 +75,6 @@ public class EntregableController {
     public ResponseEntity<List<EntregablesObjetivo>> getEntregableObjetivo(@RequestParam(value = "idproyecto") Integer idObjetivo) {
         log.info("REST request buscar todos los entregables por objetivo");
         return ResponseEntity.ok(entregableService.getEntregableObjetivo(idObjetivo));
+		
     }
 }
